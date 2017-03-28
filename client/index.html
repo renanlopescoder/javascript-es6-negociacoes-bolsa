@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Renan Lopes">
+    <meta name="description" content="Front End Web Developer">
+    <title>Negociações</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+</head>
+<body class="container">
+    
+    <h1 class="text-center">Negociações</h1>
+    
+    <form class="form" onsubmit="negociacaoController.adiciona(event)">
+        
+        <div class="form-group">
+            <label for="data">Data</label>
+            <input type="date" id="data" class="form-control" required autofocus/>        
+        </div>    
+        
+        <div class="form-group">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" min="1" step="1" id="quantidade" class="form-control" value="1" required/>
+        </div>
+        
+        <div class="form-group">
+            <label for="valor">Valor</label>
+            <input id="valor" type="number" class="form-control"  min="0.01" step="0.01" value="0.0" required />
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Incluir</button>
+    </form>
+    
+    <div class="text-center">
+        <button class="btn btn-primary text-center" type="button">
+            Importar Negociações
+        </button>
+        <button class="btn btn-primary text-center" type="button">
+            Apagar
+        </button>
+    </div> 
+    <br>
+    <br>
+    
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>DATA</th>
+                <th>QUANTIDADE</th>
+                <th>VALOR</th>
+                <th>VOLUME</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        </tbody>
+        
+        <tfoot>
+        </tfoot>
+    </table>
+    <script src="js/app/models/Negociacao.js"></script>
+    <script src="js/app/controllers/NegociacaoController.js"></script>
+    <script>
+        /**
+         * ES6 devemos usar o let ao lugar do var para declarar variáveis 
+         * pois declarações com var possuem escopo de função ou global. 
+         * Variáveis declaradas com let tem escopo de bloco e o JavaScript
+         * lançará um erro se a mesma for declarada mais de uma vez
+         * dentro do mesmo escopo.
+        */
+        
+        let negociacaoController = new NegociacaoController();
+    </script>
+</body>
+</html>
