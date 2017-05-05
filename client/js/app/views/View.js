@@ -3,7 +3,12 @@ class View {
     this._elemento = elemento;
   }
 
-  _template(model) {}
+/**
+ * Substituição do "Abstract" classe abstrata do Java lançando um erro caso o desenvolvedor não sobrescreva o método template (Override). 
+ */
+  template() {
+    throw new Error('O método template deve ser implementado');
+  }
 
   /**
    * Usamos o innerHTML para converter a String em elementos do DOM

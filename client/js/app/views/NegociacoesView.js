@@ -35,7 +35,7 @@
         ${model.negociacoes.reduce( (total, negociacao) => total + negociacao.volume, 0.0)}
      */
 
-    _template(model) {
+    template(model) {
       return `
           <table class="table table-hover table-bordered">
             <thead>

@@ -9,10 +9,10 @@ class MensagemView extends View{
   }
 
 /**
- * Usando operador ternário para exibir o parágrafo apenas se a string da mensagem estiver preenchida
+ * Usando operador ternário para exibir o parágrafo apenas se a string da mensagem estiver preenchida, pois, quando há uma string vazia é "interpretada" como false
  */
 
-  _template (model){
+  template (model){
     return model.texto ? `<p class="alert alert-info">${model.texto}</p>` : '<p></p>';
   }
 
