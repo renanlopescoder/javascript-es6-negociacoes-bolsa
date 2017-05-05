@@ -1,9 +1,12 @@
-  class NegociacoesView {
-
-    constructor (elemento){
-      this._elemento = elemento;
-    }
+  class NegociacoesView extends View{
     
+    constructor(elemento) {
+    /**
+     * super irá chamar o construtor da classe "pai", ou seja, o método constructor da classe View
+     */
+      super(elemento);
+    }
+
     /**
      * Usamos o Join para concatenar os dados e gerar uma grande string
      * @param {array} Array de Negociacoes
@@ -69,12 +72,4 @@
       `;
     }
 
-  /**
-   * Usamos o innerHTML para converter a String em elementos do DOM
-   * @param {array} Array de Negociações
-   */
-
-    update(model){
-      this._elemento.innerHTML = this._template(model);
-    }
   }

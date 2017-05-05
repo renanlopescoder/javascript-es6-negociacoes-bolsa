@@ -1,14 +1,14 @@
 {
   "name": "javascript-es6-negociacoes-bolsa",
   "version": "1.0.0",
-  "description": "",
+  "description": "Design Patterns JavaScript ES6/7",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Renan Lopes",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.12.3"
