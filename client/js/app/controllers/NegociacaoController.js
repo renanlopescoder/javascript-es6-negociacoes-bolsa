@@ -27,7 +27,6 @@ class NegociacaoController {
     this._inputData = $('#data');
     this._inputQuantidade = $('#quantidade');
     this._inputValor = $('#valor');
-    let self = this;
     /**
      * Usando o function quando usamos o 'this' em uma função o contexto é dinâmico ou seja vai alterar de acordo ao contexto onde está sendo usado e como opção podemos usar a API Reflections do JavaScript passando o contexto através do this como parâmetro do construtor e nos métodos de destino usamos o método estatico da classe Reflect.apply(this._trap, this._contexto, [this]); passando como parâmetro a função e o contexto enviado ao construtor e um array com os parametros que irão receber, assim podemos pegar o contexto anterior ao contexto de execuçãodo método.
      * 
@@ -43,34 +42,23 @@ class NegociacaoController {
      * Padrão de projeto Proxy
      */
 
-    this._listaNegociacoes = new Proxy(new ListaNegociacoes(), {
-
-      get(target, prop, receiver) {
-
-        if (['adiciona', 'removeLista'].includes(prop) && typeof (target[prop]) == typeof (Function)) {
-
-          return function () {
-
-            console.log(`método '${prop}' interceptado`);
-
-            Reflect.apply(target[prop], target, arguments);
-
-            self._negociacoesView.update(target);
-
-          }
-        }
-
-        return Reflect.get(target, prop, receiver);
-      }
-    });
+    this._listaNegociacoes = ProxyFactory.create(
+      new ListaNegociacoes(),
+      ['adiciona','removeLista'],
+      model => this._negociacoesView.update(model)
+    );
     
     this._negociacoesView = new NegociacoesView($('#negociacoesView'));
 
     // Primeira renderização da lista
     this._negociacoesView.update(this._listaNegociacoes);
 
-    this._mensagem = new Mensagem();
-    this._mensagemView = new MensagemView($('#mensagemView'))
+    this._mensagem = ProxyFactory.create(
+      new Mensagem(),
+      ['texto'],
+      model => this._mensagemView.update(model)
+    );
+    this._mensagemView = new MensagemView($('#mensagemView'));
     this._mensagemView.update(this._mensagem);
   }
 
@@ -81,7 +69,6 @@ class NegociacaoController {
     this._listaNegociacoes.adiciona(this._criaNegociacao());
 
     this._mensagem.texto = 'Negociação Adicionada com Sucesso';
-    this._mensagemView.update(this._mensagem);
 
     this._limpaFormulario();
   }
@@ -95,9 +82,8 @@ class NegociacaoController {
   }
 
   apaga() {
-    this._listaNegociacoes.esvazia();
+    this._listaNegociacoes.removeLista();
     this._mensagem.texto = 'Negociações Apagadas com Sucesso';
-    this._mensagemView.update(this._mensagem);
   }
 
   _limpaFormulario() {
