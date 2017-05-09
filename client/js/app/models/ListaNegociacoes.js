@@ -14,14 +14,22 @@ class ListaNegociacoes {
  */
 
 /** Usando a Arrow function não precisamos do contexto pois a arrow function possui escopo léxico */
-  constructor (trap) {
+  // constructor (trap) {
+  //   this._negociacoes = [];
+  //   this._trap = trap;
+  // }
+
+  /**
+   * Parão modelo Proxy
+   */
+
+  constructor () {
     this._negociacoes = [];
-    this._trap = trap;
   }
 
   adiciona(negociacao) {
     this._negociacoes.push(negociacao);
-    this._trap(this); /*Contexto NegociacaoController (Contexto Léxico da Arrow Function)*/
+    //this._trap(this); /*Contexto NegociacaoController (Contexto Léxico da Arrow Function)*/
     /**
      * Mais Informações para entendimento no construtor da classe NegociacaoController
      */
@@ -30,19 +38,13 @@ class ListaNegociacoes {
      */
   }
 
-/**
- * Programação Defensiva
- * 
- * Para evitar que o desenvolvedor possa acessar o array fora da classe diretamente temos que passa um novo array adicionando todas as informações existentes no array original com o a função concat, assim se o array for alterado fora da classe será apenas uma cópia do nosso array original.
- */
+
 
   get negociacoes () {
     return [].concat(this._negociacoes);
   }
 
-  deletaLista () {
+  removeLista () {
     this._negociacoes = [];
-    this._trap(this); /*Contexto NegociacaoController (Contexto Léxico da Arrow Function)*/
-    // Reflect.apply(this._trap, this._contexto, [this]);
   }
 }

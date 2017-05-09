@@ -36,6 +36,8 @@
      */
 
     template(model) {
+      console.log(model);
+      console.log(model.negociacoes);
       return `
           <table class="table table-hover table-bordered">
             <thead>
