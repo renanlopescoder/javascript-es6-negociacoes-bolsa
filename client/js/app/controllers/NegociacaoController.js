@@ -39,27 +39,25 @@ class NegociacaoController {
      */
 
     /**
-     * Padrão de projeto Proxy
+     * Bind é a associação entre o modelo (primeiro parametro construtor do Bind) e a view (segundo parâmetro), com o Bind podemos monitorar os parametros ou metodos passados (terceiro parâmetro).
      */
 
-    this._listaNegociacoes = ProxyFactory.create(
-      new ListaNegociacoes(),
-      ['adiciona','removeLista'],
-      model => this._negociacoesView.update(model)
-    );
-    
     this._negociacoesView = new NegociacoesView($('#negociacoesView'));
 
-    // Primeira renderização da lista
-    this._negociacoesView.update(this._listaNegociacoes);
-
-    this._mensagem = ProxyFactory.create(
-      new Mensagem(),
-      ['texto'],
-      model => this._mensagemView.update(model)
+    this._listaNegociacoes = new Bind(
+      new ListaNegociacoes(),
+      this._negociacoesView,
+      ['adiciona','removeLista']
     );
+
     this._mensagemView = new MensagemView($('#mensagemView'));
-    this._mensagemView.update(this._mensagem);
+
+    this._mensagem = new Bind(
+      new Mensagem(),
+      this._mensagemView,
+      ['texto'],
+    );
+
   }
 
   adiciona(event) {
