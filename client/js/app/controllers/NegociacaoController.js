@@ -42,20 +42,16 @@ class NegociacaoController {
      * Bind é a associação entre o modelo (primeiro parametro construtor do Bind) e a view (segundo parâmetro), com o Bind podemos monitorar os parametros ou metodos passados (terceiro parâmetro).
      */
 
-    this._negociacoesView = new NegociacoesView($('#negociacoesView'));
-
     this._listaNegociacoes = new Bind(
       new ListaNegociacoes(),
-      this._negociacoesView,
-      ['adiciona','removeLista']
+      new NegociacoesView($('#negociacoesView')),
+      'adiciona','removeLista'
     );
-
-    this._mensagemView = new MensagemView($('#mensagemView'));
 
     this._mensagem = new Bind(
       new Mensagem(),
-      this._mensagemView,
-      ['texto'],
+      new MensagemView($('#mensagemView')),
+      'texto',
     );
 
   }
